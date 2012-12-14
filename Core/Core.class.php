@@ -134,7 +134,9 @@ class Core
 	 */
 	static function exception_handler( Exception $ex )
 	{
-		//FDX_Exception :: dump( $ex );die();
+		if(Common::$isDebug){
+			FDX_Exception :: dump( $ex );die();
+		}
 		ob_end_clean();
 		if( 299<$ex->getCode() ) {
 			//数据库异常日志
@@ -190,47 +192,20 @@ class Core
 			set_exception_handler( array( __CLASS__, 'exception_handler' ) );
 		} 
 		// 初始化Session
-		// ini_set('session.gc_maxlifetime', 86400); // 24 hours (in seconds)
-		// ini_set('session.cache_expire', 1440); // 24 hours (in minutes)
-		// ini_set('session.cookie_lifetime', 86400); // 24 小时(in seconds)
-		// ini_set('session.cookie_lifetime', 0);//用户关闭浏览器，则用户就会登出。
+		 ini_set('session.gc_maxlifetime', 86400); // 24 hours (in seconds)
+		 ini_set('session.cache_expire', 1440); // 24 hours (in minutes)
+		 ini_set('session.cookie_lifetime', 86400); // 24 小时(in seconds)
+		 ini_set('session.cookie_lifetime', 0);//用户关闭浏览器，则用户就会登出。
 		$config = Core :: getConfig( 'Session' );
 		$cookie_domain = $config['cookie_domain'];
 		ini_set( 'session.cookie_domain', $cookie_domain );
 		//$config['mem_obj']	= FDX_Cache::getInstance()->getCache();
 		//FDX_MemSession::init($config);
-		$session = new FDX_MemSession();
-		$session -> start();
+//		$session = new FDX_MemSession();
+//		$session -> start();
 		//自动登录
-		$objUser = self::ImportMl('User');
-		$objUser->autoLogin();
-	}
-
-	/**
-	 * 以下加载方法依赖于配置文件中的路径设置
-	 */
-	static function LoadModel( $name )
-	{
-		$fileName = str_replace( '_' , '/' , $name );
-		$path = self :: getConfig( 'Model_Path' ) . $fileName . '.class.php';
-		if ( isset( $GLOBALS['__IncludePath'][$path] ) )
-			return;
-		if ( is_file( $path ) && is_readable( $path ) )
-		{
-			include_once $path;
-			$GLOBALS['__IncludePath'][$path] = true;
-			return;
-		}
-
-		$path = self :: getConfig( 'Model_Path' ) . $fileName . '.php';
-		if ( isset( $GLOBALS['__IncludePath'][$path] ) )
-			return;
-		if ( is_file( $path ) && is_readable( $path ) )
-		{
-			include_once $path;
-			$GLOBALS['__IncludePath'][$path] = true;
-			return;
-		}
+		//$objUser = self::ImportMl('User');
+		//$objUser->autoLogin();
 	}
 
 	static function LoadLib( $fileName )
@@ -245,30 +220,6 @@ class Core
 		}
 	}
 
-	static function Block( $blockIndex )
-	{
-		$path = Core :: getConfig( 'Block_Path' ) . str_replace( '.', '/', $blockIndex ) . '.block.php';
-		if ( is_file( $path ) && is_readable( $path ) )
-		{
-			return $path;
-		}
-		else
-		{
-			exit( 'block lost' . $blockIndex );
-		}
-	}
-
-	static function ImportModel( $name )
-	{
-		$name = "Model_{$name}";
-		if ( isset( $GLOBALS['__ModelCache'][$name] ) && !defined('USE_DB_FOR_SCRIPT') )
-			return $GLOBALS['__ModelCache'][$name];
-
-		$Model = new $name();
-		$GLOBALS['__ModelCache'][$name] = $Model ;
-
-		return $Model ;
-	}
 	
 	static function ImportMl( $name )
 	{
@@ -292,18 +243,6 @@ class Core
 		$GLOBALS['__FormatCache'][$name] = $Format ;
 
 		return $Format ;
-	}
-
-	static function ImportAPI( $name )
-	{
-		$name = "API_{$name}";
-		if ( isset( $GLOBALS['__APICache'][$name] ) && !defined('USE_DB_FOR_SCRIPT') )
-			return $GLOBALS['__APICache'][$name];
-
-		$API = new $name();
-		$GLOBALS['__APICache'][$name] = $API ;
-
-		return $API ;
 	}
 
 	static function ImportCache( $name )

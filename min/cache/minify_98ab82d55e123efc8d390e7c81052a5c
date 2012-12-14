@@ -1,0 +1,4 @@
+function Demo(val){
+	return val+' hello!';
+}
+;var GLOBAL = {};
