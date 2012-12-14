@@ -264,7 +264,7 @@ class Common
 	/**JS生产目录名*/
 	static $jsBasePath = 'js/';
 	/**JS开发目录名*/
-	static $jsSourceBasePath = 'js-source/';
+	static $jsSourceBasePath = 'js/';
 	/**CSS目录名*/
 	static $cssBasePath = 'css/';
 	/**
@@ -291,11 +291,12 @@ class Common
 	static private function getURL($name){
 		$domain = 'http://'.Core::GetConfig( 'Front_Resource_Site' );
 		$version = Core::GetConfig( 'Front_Cache_Version' );
-		if(self::$isDebug){
-			return $domain.'/'.$name.'?'.$version;
-		}else{
-			return $domain.'/min/?f='.$name.'&'.$version;
-		}
+		return $domain.'/min/?f='.$name.'&'.$version;
+		// if(self::$isDebug){
+		// 	return $domain.'/'.$name.'?'.$version;
+		// }else{
+		// 	return $domain.'/min/?f='.$name.'&'.$version;
+		// }
 	}
 	/**
 	 * 添加js文件,文件以,隔开,相对路径为/js

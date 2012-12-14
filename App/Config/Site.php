@@ -17,7 +17,8 @@ return array(
 
     'Upload_Config' => array(
 		'tmp_dir' => 'd:/',
-		'show' => array(
+		'test' => array(
+            'upload' => '/upload/?mod=test',
 		),
     ),
 

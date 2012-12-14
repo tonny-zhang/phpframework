@@ -94,7 +94,7 @@ return array(
         )
     ),
 
-    'Domain' => "test.com",
+    'Domain' => "testphpframework.com",
 
     'mongodb' => array(
 		'master' => array(

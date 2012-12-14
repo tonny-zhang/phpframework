@@ -1,0 +1,40 @@
+
+<style>
+.btn_upload{
+	position: absolute;
+	left:200px;
+	top:100px;
+	width:100px;
+	height:30px;
+	background:#ccc;
+	cursor: pointer;
+}
+.btn_upload.hover{
+	background:red;
+}
+</style>
+<div class="btn_upload">上传按钮</div>
+<script>
+$(function(){
+	seajs.config({base:'/min/?f=',charset:'utf-8',version:'20101020',isDebug:false});
+	seajs.use('js/mod/upload.js',function(upload){
+		var btnUpload = $('.btn_upload');
+		new upload.Upload({
+			btn : btnUpload,
+			'uploadUrl' : '/?mod=demo.upload.save',
+			'checkFile' : function(flashName,imgInfo){
+				return imgInfo;
+			},
+			'onAllUploadComplete' : function(flashName,files){
+				console.log(files)
+			},
+			'onMouseEnter' : function(){
+				btnUpload.addClass('hover');
+			},
+			'onMouseLeave' : function(){
+				btnUpload.removeClass('hover');
+			}
+		});
+	});
+})
+</script>
