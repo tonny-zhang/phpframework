@@ -262,11 +262,11 @@ class Common
 	/**是否处理调试状态*/
 	static $isDebug = false;
 	/**JS生产目录名*/
-	static $jsBasePath = 'js/';
+	static $jsBasePath = '/js/';
 	/**JS开发目录名*/
-	static $jsSourceBasePath = 'js/';
+	static $jsSourceBasePath = '/js/';
 	/**CSS目录名*/
-	static $cssBasePath = 'css/';
+	static $cssBasePath = '/css/';
 	/**
 	 *	格式化JS文件路径
 	 */
@@ -290,7 +290,7 @@ class Common
 	/**得到CSS或JS文件URL*/
 	static private function getURL($name){
 		$domain = 'http://'.Core::GetConfig( 'Front_Resource_Site' );
-		$version = Core::GetConfig( 'Front_Cache_Version' );
+		$version = Core::GetConfig( 'Front_Cache_Version' ).rand();
 		return $domain.'/min/?f='.$name.'&'.$version;
 		// if(self::$isDebug){
 		// 	return $domain.'/'.$name.'?'.$version;
@@ -499,6 +499,7 @@ class Common
 			$result = $Template->result( $template, $vars );
 
 			$parentVars['module'] = $result;
+			$parentVars['front_domain'] = 'http://'.Core::GetConfig( 'Front_Resource_Site' );
 			$Template->display($parent . ".html", $parentVars);
 		}
 		else

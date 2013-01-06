@@ -1,4 +1,6 @@
-{title}{#test}{#Common::getStyle()}<!-- #Common::addStyle('a.css') -->{Common::isDebug}
+{title}{#test}{#Common::getStyle()}
+<!-- #Common::addStyle('ui.css') -->
+{Common::isDebug}
 <!-- #true AS test -->
 
 {Common::isDebug}
@@ -8,3 +10,13 @@ debug
 <!-- ELSE -->
 deploy
 <!-- ENDIF -->
+
+<script>
+// seajs.use('js/a.js',function(a){
+// 	console.log('first:',a);
+// });
+seajs.use(['js/a.js','js/b.js'],function(a,b){
+	//console.log(a,b);
+	alert(a.name+b.name);
+});
+</script>

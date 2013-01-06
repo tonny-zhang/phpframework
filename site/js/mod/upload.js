@@ -435,7 +435,7 @@
 
 	/*保证seajs在解析require时的效率(减少正则要检索的字条串长度)*/
 	define(function(require,exports){
-		require('css/mod/upload.css');
+		require('../../css/mod/upload.css');
 		exports.log = Upload.log;
 		exports.Upload = function(settings){
 			this.up = new Upload(settings);

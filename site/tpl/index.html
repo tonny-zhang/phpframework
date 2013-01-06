@@ -1,9 +1,11 @@
-﻿<!-- #Script('demo.js') -->
-I'm in index.html 
+﻿I'm in index.html 
 {val} {mainVal}
 {_SESSION.test}
 <script>
+seajs.use('js/demo.js',function(d){
+	console.log(d['name']);
+});
 window.onload = function(){
-	alert(Demo('tonny'));
+	console.log(Demo('tonny'));
 }
 </script>

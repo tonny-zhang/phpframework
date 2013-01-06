@@ -1,0 +1,34 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> New Document </title>
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <script src="./sea.js"></script>
+  <script src="./index.js?1"></script>
+ </head>
+
+ <body>
+  <script type="text/javascript">
+  <!--
+	seajs.config({'base': './'});
+	seajs.use(['a','a'],function(a){
+		console.log(a);
+	});
+	seajs.use('a',function(a){
+		console.log(a);
+	});
+	seajs.use(['a','c','d'],function(a,b,c){
+		console.log(a,b,c);
+		//alert(a.name+' '+b.name+' '+c.name)
+	});
+	seajs.use(['a','c','d','b'],function(a,b,c,d){
+		console.log(a,b,c,d);
+		//alert(a.name+' '+b.name+' '+c.name)
+	});
+  //-->
+  </script>
+ </body>
+</html>
